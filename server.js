@@ -43,4 +43,5 @@ app.listen(PORT, HOST);
 //immer für eine Anweisung etwas zu tun. 
 console.log(`Running on http://${HOST}:${PORT}`);
 
-require('./uebungen/01-grundlagen.js');
+//Mit der Funktion require wird dir Datei in den runden Klammern eingelesen.
+require('./uebungen/02-boolean.js');
