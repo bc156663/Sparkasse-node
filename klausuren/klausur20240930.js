@@ -29,6 +29,9 @@ class Wuerfel{
 }
 
 //Deklaration (=Bekanntmachung), Instanziierung (=Speicherzellen reservieren)
+//let wuerfel mit kleinem "w"
+//new Wuerfel mit großem "W"
+//runde Klammern am Ende nicht vergessen!
 let wuerfel = new Wuerfel();
 
 //Initialisierung
@@ -83,21 +86,20 @@ class Zeugnis{
         this.Klasse
         this.Adresse
         this.Nachname
+        this.Klassenbeste
     }
 }
-
 
 
 // 2b)
 // Deklarieren, Instanziieren und Initialisieren Sie ein Objekt von der Zeignisklasse.
 let zeugnis = new Zeugnis()
 
-zeugniss.Mathe=1
+zeugnis.Mathe=1
 zeugnis.Deutsch= 2
-zeugniss.Englisch=2
+zeugnis.Englisch=2
 zeugnis.Adresse= "Josefsstraße 10, 46325 Borken";
 zeugnis.Klasse= "GW23A";
-
 
 // 2c)
 // Geben Sie die Eigenschaftswerte Ihres Objekts auf der Konsole aus.
@@ -109,26 +111,10 @@ console.log("Adresse: "+zeugnis.Adresse)
 console.log("Klasse:"+ zeugnis.Klasse)
 console.log("Das Zeugnis weist 7 Noten und die Fehlstunden auf. Die Note in Deutsch lautet: " + zeugniss.Deutsch+ ", Die Mathenote lautet: " + zeugniss.Mathe+ ", Die Englischnote lautet: "+ zeugniss.Englisch+ " Die Leistungskursnote ist: " + zeugniss.Leistungskurs+ ", Die Note in Religion ist:" + zeugniss.Religion+ ", Die Sportnote lautet:  " + zeugniss.Sport+ " ,Die Wirtschaftsinformatiknote ist: " + zeugniss.Wirtschaftsinformatik+ ". Auf dem Zeugniss sind" +zeugniss.Fehlstunden+ " Fehlstunden abzulesen.")
 
-
-
 // 2d) NUR KLAUSURSCHREIBER
 // Berechnen Sie die Durchnittsnote Ihres Objekts. Geben Sie die Durchschnittsnote auf der Konsole aus.
 
-class Durchschnittsnote{
-    constructor(){
-    this.Deutsch= 1
-    this.Mathe=3
-    this.Englisch=2
-    this.Leistzeugnissungskurs=3
-    this.Religion=4
-    this.Sport=2
-    this.Wirtschaftsinformatik=1
-    this.Fehlstunden= 2
-    }
-}
-let durchschnittsnote = new Durchschnittsnote()
-
-zeugniss.durchschnittsnote = ((zeugniss.Deutsch*zeugniss.Mathe*zeugniss.Englisch*zeugniss.Leistungskurs*zeugniss.Religion*zeugniss.Sport*zeugniss.Wirtschaftsinformatik)/7)
+let durchschnitt = (zeugnis.Mathe + zeugnis.Deutsch + zeugnis.Englisch)/3;
 
 console.log('Die Durchschnittsnote beträgt: '+zeugniss.durchschnittsnote)
 
@@ -143,11 +129,17 @@ console.log('Die Durchschnittsnote beträgt: '+zeugniss.durchschnittsnote)
 // Beispiel der Anwendung von Math.min():
 // let x = Math.min(5, 10); --> Es werden 5 und 10 verglichen. x nimmt jetzt den Wert 5 an, da 5 der niedrigste der kommaseparierten Werte ist.
 
-let Durchschnittsnote= Math.min(3,4,5);
+let lisa = 3;   //bei lokalen Variablen mit Kleinbuchstaben beginnen.
+let tom = 4:
+let max = 5;
 
-
-
-
+if(durchschnitt < Math.min(lisa, tom, max)){
+    zeugnis.Klassenbeste = true;      //Es wird im Zeugnis eine neue Eigenschaft ergänzt.
+    console.log("Lisa hat einen Durchschnitt von" + durchschnitt + ". Sie ist Klassenbeste.")
+}else{
+    zeugnis.Klassenbeste = false;
+    console.log("Lisa hat einen Durchschnitt von" + durchschnitt + ". Sie ist nicht Klassenbeste.")
+}
 
 
 console.log("Aufgabe 3")
@@ -168,71 +160,65 @@ console.log("Aufgabe 3")
 // 3a)
 // Deklarieren, Instanziieren Sie ein Objekt mit allen genannten Eigenschaften. 
 
-class Kosten{
+class Produkt{
     constructor(){
-        this.Rabatt
-        this.Listenpreis
-        this.Rabattprozentsatz
-        this.Nettorechnungsbetrag
-        this.MwSt
-        this.MwStprozentsatz
-        this.Bruttorechnungsbetrag
+        this.Art                         //Eigenschaften beginnen immer mit Großbuchstaben!
+        this.MehrwertsteuerSatz          //Kamelhöckernotation verwenden!
+        this.Mehrwertsteuer              //D.h. Wörter mit Großbuchstaben verbinden.
+        this.NettoRechnungsbetrag        // + Keine Leerzeichen in Namen!
+        this.BruttoRechnungsbetrag       // + Keine Bindestiche in Namen!
+        this.Skontosatz 
         this.Skonto
-        this.Skontoprozentsatz
         this.Zahlungsbetrag
+        this.Rabatt
+        this.Rabbatsatz
     }
 }
 
-let kosten=new Kosten()
-kosten.Nettorechnungsbetrag
-
-class Mehrwertssteuer{
-    constructor(){
-    this.LebensmittelZeitungBuch
-    this.Andere
-    }
-}
-
-let mehrwertssteuer= new Mehrwertssteuer()
-mehrwertssteuer.LebensmittlZeitungBuch= 7 
-mehrwertssteuer.Andere=19 
-
+let produkt=new Produkt();
 
 
 // 3b
 // Initialisieren Sie Ihr Objekt mit den gegebenen Werten. 
 // Geben Sie die einen Anwortsatz auf der Konsole aus.
 
+produkt.NettoRechnungsbetrag = 370       //Bitte kein Komma, sondern den Punkt für Nachkommastellen 
+                                         //verwenden
+                                         //Bitte keine Einheit (z.B.Eur) dahinterschreiben!
+                                         //"370,00 Euro" ist keine Zahl.Damit kann nicht gerechnet werden.
+
+produkt.Art = "Zeitung"
+
+//Wenn die Produktart Zeitung ODER Lebensmittel oder Buch ist, dann...
+if(produkt.Art === "Zeitung" || produkt.Art === "Lebensmittel" || produkt.Art === "Buch"){
+  
+    produkt.MehrwertsteuerSatz = 0.07          //Alternativ kann man auch 7 schreiben. Dann ändert sich 
+                                               //natürlich die Berechnung im Folgenden.
+
+}else{
+
+    produkt.MehrwertsteuerSatz = 0.19          
+    
+}
+
+console.log("Der MwST-Satz beträgt:" + produkt.MehrwertsteuerSatz)
+console.log("Produktart:" + produkt.Art)
 
 
 // 3c)
 // Berechnen Sie die MwSt in einer sprechenden Variablen. Geben Sie einen Anwortsatz auf der Konsole aus.
 
-let MwStAufgabe= new Mehrwertssteuer()
-MwStAufgabe= kosten.Nettorechnungsbetrag*mehrwertssteuer.LebensmittlZeitungBuch/100%
+produkt.Mehrwertsteuer = produkt.NettoRechnungsbetrag * produkt.MehrwertsteuerSatz
 
-console.log('Die Mehrwertssteuer beträgt'+ MwStAufgabe + "Eur , da es sich bei den Produkten um Zeitungen handelt.")
-
+console.log("Mehrwertsteuer: "+ produkt.Mehrwertsteuer)
 
 
 // 3d)
 // Berechnen Sie den Eigenschaftswert des Brutto-Rechnungsbetrags. 
 // Wenn die Produktart sich ändert, muss Ihre Berechnung sich anpassen.
 // Geben Sie den Wert in einen Anwortsatz auf der Konsole aus.
-
-class Bruttorechnungsbetrag{
-    constructor(){
-    this.Nettorechnungsbetrag
-    this.MwSt
-    }
-}
-
-let bruttorechnungsbetrag=new Bruttorechnungsbetrag()
-bruttorechnungsbetrag=kosten.Nettorechnungsbetrag+MwStAufgabe
-
-
-
-
+produkt.BruttoRechnungsbetrag = produkt.NettoRechnungsbetrag + produkt.Mehrwertsteuer
+console.log("Brutto Rechnungsbetrag" + produkt.BruttoRechnungsbetrag)
 
 // 3e) NUR KLAUSURSCHREIBER
 // Das Skonto ist gestaffelt abhängig vom Brutto-Rechnungsbetrags.
@@ -248,6 +234,16 @@ bruttorechnungsbetrag=kosten.Nettorechnungsbetrag+MwStAufgabe
 //                                  500 | 2
 
 // Berechnen Sie das Skonto und geben Sie das Ergebnis auf der Konsole aus.
+
+produkt.Skonto
+
+if(produkt.BruttoRechnungsbetrag<900){ produkt.Skonto = 2 }
+if(produkt.BruttoRechnungsbetrag<800){ produkt.Skonto = 1.9 }
+if(produkt.BruttoRechnungsbetrag<700){ produkt.Skonto = 1.8 }
+if(produkt.BruttoRechnungsbetrag<600){ produkt.Skonto = 1.7 }
+if(produkt.BruttoRechnungsbetrag<500){ produkt.Skonto = 1.6 }
+if(produkt.BruttoRechnungsbetrag<400){ produkt.Skonto = 1.5 }
+if(produkt.BruttoRechnungsbetrag<300){ produkt.Skonto = 1.4 }
 
 console.log("Aufgabe 4") // NUR KLAUSURSCHREIBER
 
