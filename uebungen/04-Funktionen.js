@@ -88,7 +88,7 @@ class Kredit{
     }
 
     berechneGesamtkostenAmEndeDerLaufzeit(){
-        return this.Betrag + this.Bertag * this.Zinssatz
+        return this.Betrag * Math.pow((1+this.Zinssatz),this.Laufzeit)
     }
 }
 
