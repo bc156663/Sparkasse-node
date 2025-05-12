@@ -1,3 +1,69 @@
+const sqlite3 = require('sqlite3').verbose(); // SQLite3 import
+
+// Initialize SQLite database and create "Kunden" table
+const db = new sqlite3.Database('./database.db', (err) => {
+    if (err) {
+        console.error('Error opening database ' + err.message);
+    } else {
+        console.log('Connected to the SQLite database.');
+    }
+});
+
+// Create "Kunden" table if it doesn't exist
+// The table structure is defined here
+// with the following columns: KundenNr, Nachname, Vorname, Wohnort, PLZ, Strasse, Kennwort, Benutzername
+// The KundenNr is the primary key and auto-incremented
+// The other columns are defined as NOT NULL
+// This means that they cannot be null when inserting a new record
+// The table is created if it doesn't exist
+// The database is serialized to ensure that the operations are executed in order
+// This is important for database integrity
+// The create table statement is executed
+// If there is an error creating the table, it is logged to the console
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS Kunden (
+        KundenNr INTEGER PRIMARY KEY AUTOINCREMENT,
+        Nachname TEXT NOT NULL,
+        Vorname TEXT NOT NULL,
+        Wohnort TEXT NOT NULL,
+        PLZ TEXT NOT NULL,
+        Strasse TEXT NOT NULL,
+        Kennwort TEXT NOT NULL,
+        Benutzername TEXT NOT NULL
+    )`, (err) => {
+        if (err) {
+            console.error('Error creating table ' + err.message);
+        } else {
+            console.log('Kunden table created or already exists.');
+        }
+    });
+});
+
+
+// Beispielkunde in die Tabelle "Kunden" einfügen
+db.run(`INSERT INTO Kunden (Nachname, Vorname, Wohnort, PLZ, Strasse, Kennwort, Benutzername) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)`, 
+        ['Mustermann', 'Max', 'Musterstadt', '12345', 'Musterstraße 1', 'passwort123', 'maxmuster'], 
+        function(err) {
+    if (err) {
+        console.error('Fehler beim Einfügen des Beispielkunden:', err.message);
+    } else {
+        console.log(`Beispielkunde mit ID ${this.lastID} erfolgreich eingefügt.`);
+    }
+});
+
+
+// Abfrage, um alle Kunden aus der Tabelle "Kunden" auszugeben
+db.all('SELECT * FROM Kunden', (err, rows) => {
+    if (err) {
+        console.error('Fehler beim Abrufen der Kunden:', err.message);
+    } else {
+        console.log('Kunden aus der Tabelle:');
+        rows.forEach((row) => {
+            console.log(row);
+        });
+    }
+});
 
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
