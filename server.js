@@ -45,6 +45,10 @@ db.run(`INSERT INTO Kunden (Nachname, Vorname, Wohnort, PLZ, Strasse, Kennwort, 
         VALUES (?, ?, ?, ?, ?, ?, ?)`, 
         ['Mustermann', 'Max', 'Musterstadt', '12345', 'Musterstraße 1', 'passwort123', 'maxmuster'], 
         function(err) {
+    //wenn err nicht null ist, dann ist ein Fehler aufgetreten
+    // und die Fehlermeldung wird in der Konsole ausgegeben
+    // wenn err gleich null ist, dann ist kein Fehler aufgetreten
+    // und die ID des neu eingefügten Datensatzes wird in der Konsole ausgegeben
     if (err) {
         console.error('Fehler beim Einfügen des Beispielkunden:', err.message);
     } else {
