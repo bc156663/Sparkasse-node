@@ -151,6 +151,30 @@ app.get('/ueberweisungAusfuehren',(req, res)=>{
 //PORT zu lauschen.
 app.listen(PORT, HOST);
 
+let meldung="";
+
+//Die Datenbank wird abgefragt, ob es einenKundenmit dem angegebenen Benutzernamen gibt
+//Mit select wird eine Abfrage an die Datenbank geschickt, die alle Spalten der Tabelle "Kunden"
+// * steht für alle Spalten der Tabelle
+//die Zeilen werden mit der WHERE-Klausel gefiltert, sodass nur die Zeile(n) zurückgegeben werden,
+
+db.get(`SELECT * FROM Kunden WHERE Benutzername = ?`, [benutzername], (err, row) => {
+    // Wenn ein Fehler aufgetreten ist, wird eine Fehlermeldung ausgegeben
+    //Wenn err nicht null ist, dann ist ein Fehler aufgetreten
+    if (err) {
+        // err ist nicht einfach ein stirng, sondern ein Objekt, das Informationen über den Fehler enthält
+        console.error('Fehler beim Abrufen des Kunden:', err.message);
+    } else {
+        if (row) {
+            // Wenn ein Kunde gefunden wurde, wird eine Erfolgsmeldung ausgegeben
+            meldung = `Kunde gefunden: ${row.Vorname} ${row.Nachname}`;
+        } else {
+            // Wenn kein Kunde gefunden wurde, wird eine Fehlermeldung ausgegeben
+            meldung = 'Kein Kunde mit diesem Benutzernamen gefunden.';
+        }
+    }
+}   );   
+
 //Mit der Anweisung console.log() wird dem Server-Administrator auf der 
 //Konsole angezeigt, was der Server macht. Dwer Programmierer schreibt dazu 
 //in die runden Klammern den Ausdruck, der auf der Konsole angezeigt 
